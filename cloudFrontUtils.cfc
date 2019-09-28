@@ -42,6 +42,8 @@ component output="false" hint="A utility for creating URLs for Amazon's CloudFro
 		// https://stackoverflow.com/questions/40733190/using-coldfusion-to-sign-data-for-single-sign-on
 		// However, we have to read in a .der file for this to work with CloudFront, but the core principles are the same
 		// This page was also helpful in understanding what is needed: https://stackoverflow.com/questions/20119874/how-to-load-the-private-key-from-a-der-file-into-java-private-key-object
+		// To convert a .pem keyfile in to .der format, run the following (thank you John Pansewicz!)
+		// openssl pkcs8 -topk8 -nocrypt -in pk-XXXXX.pem -inform PEM -out pk-XXXXX.der -outform DER
 		var derContent = FileReadBinary(arguments.privateKeyFilePath);
 		var keySpec = createObject("java", "java.security.spec.PKCS8EncodedKeySpec");
 		var keyFactory = createObject("java", "java.security.KeyFactory").getInstance("RSA");
